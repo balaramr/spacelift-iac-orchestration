@@ -34,12 +34,13 @@ output "aws_account_id" {
 resource "aws_s3_bucket" "orbit_storage" {
   bucket_prefix = "orbit-storage-"
 
-tags = {
-  name        = "Orbit Labs Storage"
-  managedBy   = "Spacelift"
-  mission     = "First Launch"
-  environment = "demo"
-}
+  tags = {
+    name        = "Orbit Labs Storage"
+    managedBy   = "Spacelift"
+    mission     = "First Launch"
+    project     = "Orbit-labs"
+    environment = "demo"
+  }
 }
 
 
