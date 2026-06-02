@@ -7,14 +7,17 @@ terraform {
   }
 }
 
-# 1. Configured Region to eu-west-1
 provider "aws" {
   region = "eu-west-1"
 }
 
-# 2. Configured clean Ubuntu 22.04 LTS AMI for eu-west-1
+# Dynamically fetch the latest stable Ubuntu 22.04 AMI for eu-west-1
+data "aws_ssm_parameter" "ubuntu_ami" {
+  name = "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+}
+
 resource "aws_instance" "app_server" {
-  ami           = "ami-0d940f23d527c3041"
+  ami           = data.aws_ssm_parameter.ubuntu_ami.value # Uses the dynamic ID found above
   instance_type = "t2.micro"
 
   tags = {
