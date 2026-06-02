@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "172.31.16.0/16"
   tags = {
     name    = "Orbit Labs VPC"
     project = "Orbit-labs"
@@ -21,7 +21,7 @@ resource "aws_vpc" "main" {
 
 resource "aws_subnet" "main" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
+  cidr_block        = "172.31.16.0/20"
   availability_zone = "eu-west-1a"
   tags = {
     name    = "Orbit Labs Subnet"
@@ -34,4 +34,4 @@ output "subnet_id" {
   description = "ID of the main subnet"
 }
 
-# 
+#
