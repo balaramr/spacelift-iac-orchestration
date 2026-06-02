@@ -8,3 +8,5 @@ variable "vpc_name" {
   description = "name of vpc"
   type        = string
 }
+
+# random variables
