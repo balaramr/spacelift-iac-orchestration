@@ -11,21 +11,23 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+# Clean /16 VPC Network Boundary
 resource "aws_vpc" "main" {
-  cidr_block = "172.31.16.0/16"
+  cidr_block = "172.31.0.0/16"
   tags = {
-    name    = "Orbit Labs VPC"
-    project = "Orbit-labs"
+    Name    = "Orbit Labs VPC"
+    Project = "Orbit-labs"
   }
 }
 
+# Subnet carved inside the parent VPC space
 resource "aws_subnet" "main" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "172.31.16.0/20"
   availability_zone = "eu-west-1a"
   tags = {
-    name    = "Orbit Labs Subnet"
-    project = "Orbit-labs"
+    Name    = "Orbit Labs Subnet"
+    Project = "Orbit-labs"
   }
 }
 
@@ -33,5 +35,3 @@ output "subnet_id" {
   value       = aws_subnet.main.id
   description = "ID of the main subnet"
 }
-
-#
