@@ -11,7 +11,7 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-# Clean /16 VPC Network Boundary
+# Clean /16 VPC Network Boundary Base
 resource "aws_vpc" "main" {
   cidr_block = "172.31.0.0/16"
   tags = {
@@ -20,7 +20,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-# Subnet carved inside the parent VPC space
+# Subnet safely carved inside the parent VPC space
 resource "aws_subnet" "main" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "172.31.16.0/20"
